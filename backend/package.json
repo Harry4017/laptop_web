@@ -1,0 +1,24 @@
+{
+  "name": "laptop-web-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/seed.js",
+    "migrate": "node src/migrate.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
+
