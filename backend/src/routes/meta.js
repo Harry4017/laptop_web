@@ -3,11 +3,11 @@ const { Laptop } = require("../models/Laptop");
 
 const router = express.Router();
 
-router.get("/hangs", async (req, res, next) => {
+router.get("/categories", async (req, res, next) => {
   try {
-    const hangs = await Laptop.distinct("hang");
-    hangs.sort((a, b) => a.localeCompare(b, "vi"));
-    res.json({ hangs });
+    const categories = await Laptop.distinct("category");
+    categories.sort((a, b) => a.localeCompare(b, "en"));
+    res.json({ categories });
   } catch (err) {
     next(err);
   }

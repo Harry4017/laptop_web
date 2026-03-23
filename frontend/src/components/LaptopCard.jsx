@@ -1,37 +1,31 @@
 import { Link } from "react-router-dom";
-import { formatVND } from "../lib/format";
+import { formatUSD } from "../lib/format";
 
 function fallbackImg(url) {
   return url || "https://images.unsplash.com/photo-1496181133206-80ce9b88a853";
 }
 
-export default function LaptopCard({ item, onEdit, onDelete }) {
+export default function LaptopCard({ item }) {
   return (
     <div className="simpleCard">
       <Link to={`/san-pham/${item._id}`} className="simpleImg">
-        <img src={fallbackImg(item.hinhAnhUrl)} alt={item.ten} loading="lazy" />
+        <img src={fallbackImg(item.imageUrl)} alt={item.name} loading="lazy" />
       </Link>
       <div className="simpleBody">
-        <div className="simpleTitle">{item.ten}</div>
+        <div className="simpleTitle">{item.name}</div>
         <div className="simpleText">
-          <span className="label">Danh mục:</span> {item.danhMuc || "Laptop"}
+          <span className="label">Category:</span> {item.category || "Laptop"}
         </div>
         <div className="simpleText">
-          <span className="label">Giá:</span> <span className="priceGreen">{formatVND(item.giaVND)}</span>
+          <span className="label">Price:</span> <span className="priceGreen">{formatUSD(item.priceUSD)}</span>
         </div>
         <div className="simpleText">
-          <span className="label">Tồn kho:</span> {item.tonKho ?? 0}
+          <span className="label">Stock:</span> {item.stock ?? 0}
         </div>
         <div className="simpleActions">
           <Link to={`/san-pham/${item._id}`} className="btnBlue">
-            Xem
+            View
           </Link>
-          <button className="btnYellow" onClick={() => onEdit(item)}>
-            Sửa
-          </button>
-          <button className="btnRed" onClick={() => onDelete(item)}>
-            Xóa
-          </button>
         </div>
       </div>
     </div>

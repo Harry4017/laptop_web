@@ -5,14 +5,14 @@ export default function Header({ cartCount }) {
     <header className="header">
       <div className="container headerInner">
         <NavLink to="/" className="brand">
-          LaptopWeb
+          SimpleShop
         </NavLink>
         <nav className="nav">
           <NavLink to="/" className="navLink">
-            Sản phẩm
+            Products
           </NavLink>
           <NavLink to="/gio-hang" className="navLink">
-            Giỏ hàng ({cartCount})
+            Cart ({cartCount})
           </NavLink>
         </nav>
       </div>

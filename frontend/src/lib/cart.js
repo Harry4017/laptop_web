@@ -1,4 +1,4 @@
-const KEY = "laptop_web_cart_v1";
+const KEY = "laptop_web_cart_v2";
 
 export function loadCart() {
   try {
@@ -15,20 +15,20 @@ export function saveCart(cart) {
   localStorage.setItem(KEY, JSON.stringify(cart));
 }
 
-export function addToCart(cart, laptop, quantity) {
+export function addToCart(cart, product, quantity) {
   const qty = Math.max(1, Number(quantity || 1));
   const items = [...cart.items];
-  const idx = items.findIndex((x) => x.id === laptop._id);
+  const idx = items.findIndex((x) => x.id === product._id);
   if (idx >= 0) {
     items[idx] = { ...items[idx], quantity: items[idx].quantity + qty };
   } else {
     items.push({
-      id: laptop._id,
-      ten: laptop.ten,
-      hang: laptop.hang,
-      giaVND: laptop.giaVND,
-      hinhAnhUrl: laptop.hinhAnhUrl,
-      tonKho: laptop.tonKho,
+      id: product._id,
+      name: product.name,
+      category: product.category,
+      priceUSD: product.priceUSD,
+      imageUrl: product.imageUrl,
+      stock: product.stock,
       quantity: qty
     });
   }
@@ -51,7 +51,7 @@ export function clearCart() {
 
 export function cartSummary(cart) {
   const soLuong = cart.items.reduce((sum, x) => sum + x.quantity, 0);
-  const tongTien = cart.items.reduce((sum, x) => sum + x.quantity * (x.giaVND || 0), 0);
+  const tongTien = cart.items.reduce((sum, x) => sum + x.quantity * (x.priceUSD || 0), 0);
   return { soLuong, tongTien };
 }
 

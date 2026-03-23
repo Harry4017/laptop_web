@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchLaptopById } from "../lib/api";
-import { formatVND } from "../lib/format";
+import { formatUSD } from "../lib/format";
 
 function fallbackImg(url) {
   return url || "https://images.unsplash.com/photo-1517336714731-489689fd1ca8";
@@ -39,9 +39,9 @@ export default function ProductDetail({ onAddToCart }) {
   return (
     <div className="container">
       <div className="breadcrumb">
-        <Link to="/san-pham">Sản phẩm</Link>
+        <Link to="/san-pham">Products</Link>
         <span className="muted">/</span>
-        <span>{item?.ten || "Chi tiết"}</span>
+        <span>{item?.name || "Detail"}</span>
       </div>
 
       {error ? <div className="alert">{error}</div> : null}
@@ -50,41 +50,16 @@ export default function ProductDetail({ onAddToCart }) {
       {item ? (
         <div className="detail">
           <div className="detailMedia">
-            <img src={fallbackImg(item.hinhAnhUrl)} alt={item.ten} />
+            <img src={fallbackImg(item.imageUrl)} alt={item.name} />
           </div>
           <div className="detailBody">
-            <h2 className="detailTitle">{item.ten}</h2>
+            <h2 className="detailTitle">{item.name}</h2>
             <div className="rowWrap">
-              <span className="pill">{item.hang}</span>
-              <span className="pillMuted">Tồn kho: {item.tonKho}</span>
+              <span className="pill">{item.category}</span>
+              <span className="pillMuted">Stock: {item.stock}</span>
             </div>
 
-            <div className="priceBig">{formatVND(item.giaVND)}</div>
-
-            {item.moTa ? <p className="muted">{item.moTa}</p> : null}
-
-            <div className="specs">
-              <div className="spec">
-                <div className="muted">CPU</div>
-                <div>{item.cpu}</div>
-              </div>
-              <div className="spec">
-                <div className="muted">RAM</div>
-                <div>{item.ramGB}GB</div>
-              </div>
-              <div className="spec">
-                <div className="muted">Ổ cứng</div>
-                <div>{item.oCung}</div>
-              </div>
-              <div className="spec">
-                <div className="muted">Màn hình</div>
-                <div>{item.manHinh}</div>
-              </div>
-              <div className="spec">
-                <div className="muted">Card đồ hoạ</div>
-                <div>{item.cardDoHoa}</div>
-              </div>
-            </div>
+            <div className="priceBig">{formatUSD(item.priceUSD)}</div>
 
             <div className="row">
               <input
@@ -93,11 +68,11 @@ export default function ProductDetail({ onAddToCart }) {
                 value={String(qty)}
                 onChange={(e) => setQty(Number(e.target.value.replace(/[^\d]/g, "")) || 1)}
               />
-              <button className="btnPrimary" onClick={() => onAddToCart(item, qty)} disabled={item.tonKho === 0}>
-                {item.tonKho === 0 ? "Hết hàng" : "Thêm vào giỏ"}
+              <button className="btnPrimary" onClick={() => onAddToCart(item, qty)} disabled={item.stock === 0}>
+                {item.stock === 0 ? "Out of stock" : "Add to cart"}
               </button>
               <Link to="/gio-hang" className="btnGhost">
-                Xem giỏ hàng
+                View cart
               </Link>
             </div>
           </div>

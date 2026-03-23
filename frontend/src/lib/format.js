@@ -1,5 +1,5 @@
-export function formatVND(value) {
+export function formatUSD(value) {
   const n = Number(value || 0);
-  return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(n);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 }
 

@@ -4,9 +4,9 @@ export default function NotFound() {
   return (
     <div className="container">
       <div className="empty">
-        <h2>Không tìm thấy trang</h2>
+        <h2>Page not found</h2>
         <Link to="/" className="btnPrimary">
-          Về trang chủ
+          Go home
         </Link>
       </div>
     </div>
